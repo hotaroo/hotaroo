@@ -60,16 +60,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Timezone
+    | Application Timezone and Date Time Format
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the default timezone for your application, which
-    | will be used by the PHP date and date-time functions. We have gone
-    | ahead and set this to a sensible default for you out of the box.
+    | Here you may specify the default timezone, date and time format for your
+    | application, which will be used by the PHP date and date-time functions.
+    | We have gone ahead and set this to a sensible default for you out
+    | of the box.
     |
     */
 
     'timezone' => 'UTC',
+    'date_format' => 'Y-m-d',
+    'time_format' => 'H:i',
 
     /*
     |--------------------------------------------------------------------------
@@ -193,6 +196,8 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\FakerServiceProvider::class,
+        App\Providers\FilamentServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
     ],
