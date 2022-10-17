@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('quota:store')->everyMinute();
-        $schedule->command('quota:summarise')->everyFifteenMinutes();
+        $schedule->command('quota:summarise')->everyFiveMinutes();
     }
 
     /**
