@@ -3,3 +3,11 @@
 .filament-main {
     @apply min-h-screen
 }
+
+.filament-widgets-chart-widget > div > div {
+    @apply overflow-x-auto
+}
+
+.filament-widgets-chart-widget > div > div > div {
+    @apply w-[200%] md:w-full
+}
