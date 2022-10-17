@@ -25,8 +25,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Http::macro('ecoflow', function () {
-            return Http::acceptJson()
-                       ->baseUrl('https://api.ecoflow.com/iot-service/open/api');
+            return Http::withHeaders([
+                'User-Agent' => config('app.name').' ('
+                                .config('mail.from.address').')',
+            ])
+                ->acceptJson()
+                ->baseUrl('https://api.ecoflow.com/iot-service/open/api');
         });
     }
 }
