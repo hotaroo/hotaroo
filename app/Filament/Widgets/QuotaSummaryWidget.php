@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use Carbon\CarbonInterface;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Card;
 
@@ -18,8 +19,9 @@ class QuotaSummaryWidget extends BaseWidget
 
             $cards->push(
                 Card::make(
-                    'In since '.$device->created_at->format(
-                        auth()->user()->date_format
+                    'In in '.$device->created_at->diffForHumans(
+                        now(),
+                        CarbonInterface::DIFF_ABSOLUTE
                     ),
                     number_format(
                         optional($quotaSummary)->watt_hours_in_cumsum / 1000,
@@ -32,8 +34,9 @@ class QuotaSummaryWidget extends BaseWidget
 
             $cards->push(
                 Card::make(
-                    'Out since '.$device->created_at->format(
-                        auth()->user()->date_format
+                    'Out in '.$device->created_at->diffForHumans(
+                        now(),
+                        CarbonInterface::DIFF_ABSOLUTE
                     ),
                     number_format(
                         optional($quotaSummary)->watt_hours_out_cumsum / 1000,
