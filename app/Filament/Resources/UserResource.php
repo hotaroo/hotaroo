@@ -66,7 +66,7 @@ class UserResource extends Resource
                             )
                             ->hintIcon('heroicon-s-information-circle')
                             ->helperText(fn ($state, \Closure $get) => now()
-                                ->tz($get('timezone'))
+                                ->timezone($get('timezone'))
                                 ->format(
                                     $state ?? config('app.date_format')
                                 )
@@ -79,7 +79,7 @@ class UserResource extends Resource
                             )
                             ->hintIcon('heroicon-s-information-circle')
                             ->helperText(fn ($state, \Closure $get) => now()
-                                ->tz($get('timezone'))
+                                ->timezone($get('timezone'))
                                 ->format(
                                     $state ?? config('app.time_format')
                                 )
