@@ -19,8 +19,8 @@ class QuotaSummaryWidget extends BaseWidget
 
             $cards->push(
                 Card::make(
-                    'In in '.$device->created_at->diffForHumans(
-                        now(),
+                    'In in '.$device->created_at->startOfDay()->diffForHumans(
+                        now()->startOfDay()->addDay(),
                         CarbonInterface::DIFF_ABSOLUTE
                     ),
                     number_format(
@@ -34,8 +34,8 @@ class QuotaSummaryWidget extends BaseWidget
 
             $cards->push(
                 Card::make(
-                    'Out in '.$device->created_at->diffForHumans(
-                        now(),
+                    'Out in '.$device->created_at->startOfDay()->diffForHumans(
+                        now()->startOfDay()->addDay(),
                         CarbonInterface::DIFF_ABSOLUTE
                     ),
                     number_format(
