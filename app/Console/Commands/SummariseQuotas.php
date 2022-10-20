@@ -43,7 +43,7 @@ class SummariseQuotas extends Command
                                  ->get();
 
                 foreach ($quotas as $quota) {
-                    $timestamp = $quota->timestamp->startOfHour()->addHour();
+                    $timestamp = $quota->timestamp->startOfHour();
 
                     $currentSummary = $summaries->firstWhere(
                         'timestamp', $timestamp

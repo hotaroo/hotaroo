@@ -107,9 +107,9 @@ class QuotaSummaryChart extends LineChartWidget
 
             if ($labels->isEmpty()) {
                 $labels = $data->pluck('timestamp')
-                           ->map(fn ($item) => $item->timezone(
-                               auth()->user()->timezone
-                           )->format('H'));
+                               ->map(fn ($item) => $item->timezone(
+                                   auth()->user()->timezone
+                               )->addHour()->format('H'));
             }
         }
 

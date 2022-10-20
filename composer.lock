@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1dfc1ebc6c0557a1921fdbbf2cab02c9",
+    "content-hash": "0716abbbfc9831831930855a91126f16",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -1432,16 +1432,16 @@
         },
         {
             "name": "flowframe/laravel-trend",
-            "version": "v0.1.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Flowframe/laravel-trend.git",
-                "reference": "10f80dad8225caca58d286b580ebd27c2a0bf3fa"
+                "url": "https://github.com/hotaroo/laravel-trend.git",
+                "reference": "c071004f122e04d1467b824f462c0fe6b3694de4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Flowframe/laravel-trend/zipball/10f80dad8225caca58d286b580ebd27c2a0bf3fa",
-                "reference": "10f80dad8225caca58d286b580ebd27c2a0bf3fa",
+                "url": "https://api.github.com/repos/hotaroo/laravel-trend/zipball/c071004f122e04d1467b824f462c0fe6b3694de4",
+                "reference": "c071004f122e04d1467b824f462c0fe6b3694de4",
                 "shasum": ""
             },
             "require": {
@@ -1457,6 +1457,7 @@
                 "spatie/laravel-ray": "^1.23",
                 "vimeo/psalm": "^4.8"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -1474,7 +1475,19 @@
                     "Flowframe\\Trend\\Database\\Factories\\": "database/factories"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Flowframe\\Trend\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "./vendor/bin/pest --no-coverage"
+                ],
+                "test-coverage": [
+                    "vendor/bin/phpunit --coverage-html coverage"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -1493,16 +1506,15 @@
                 "laravel-trend"
             ],
             "support": {
-                "issues": "https://github.com/Flowframe/laravel-trend/issues",
-                "source": "https://github.com/Flowframe/laravel-trend/tree/v0.1.1"
+                "source": "https://github.com/hotaroo/laravel-trend/tree/master"
             },
             "funding": [
                 {
-                    "url": "https://github.com/larsklopstra",
-                    "type": "github"
+                    "type": "github",
+                    "url": "https://github.com/larsklopstra"
                 }
             ],
-            "time": "2022-02-25T13:52:24+00:00"
+            "time": "2022-10-20T17:53:22+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -12305,6 +12317,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "flowframe/laravel-trend": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,

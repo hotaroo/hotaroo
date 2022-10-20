@@ -56,28 +56,35 @@ class HistoryChart extends BarChartWidget
     {
         switch ($this->filter) {
             case 'm':
-                $start = now()->startOfDay()->subMonth();
-                $end = now()->endOfDay();
+                $start = now(auth()->user()->timezone)
+                             ->startOfDay()
+                             ->subMonth();
+                $end = now(auth()->user()->timezone)->endOfDay();
                 $interval = 'perDay';
+                $format = 'd';
 
                 break;
             case 'y':
-                $start = now()->startOfMonth()->subYear();
-                $end = now()->endOfMonth();
+                $start = now(auth()->user()->timezone)
+                             ->startOfMonth()
+                             ->subYear();
+                $end = now(auth()->user()->timezone)->endOfMonth();
                 $interval = 'perMonth';
+                $format = 'M';
 
                 break;
             default: // case 'w'
-                $start = now()->startOfDay()->subWeek();
-                $end = now()->endOfDay();
+                $start = now(auth()->user()->timezone)->startOfDay()->subWeek();
+                $end = now(auth()->user()->timezone)->endOfDay();
                 $interval = 'perDay';
+                $format = 'D';
         }
 
         $datasets = collect();
         $labels = collect();
 
         foreach (auth()->user()->devices as $device) {
-            $data = Trend::query(
+            $trend = Trend::query(
                 QuotaSummary::whereBelongsTo($device)
             )
                 ->between(
@@ -86,21 +93,24 @@ class HistoryChart extends BarChartWidget
                 )
                 ->$interval()
                 ->dateColumn('timestamp')
-                ->sum('watt_hours_in_sum');
+                ->convertTimezone(
+                    from: config('app.timezone'),
+                    to: auth()->user()->timezone
+                );
 
             $datasets->push(
                 [
                     'label' => $device->label,
-                    'data' => $data->map(
+                    'data' => $trend->sum('watt_hours_in_sum')->map(
                         fn (TrendValue $value) => $value->aggregate / 1000
                     ),
                     'borderWidth' => 3,
                 ],
             );
 
-            // TODO: date format
             if ($labels->isEmpty()) {
-                $labels = $data->map(fn (TrendValue $value) => $value->date);
+                $labels = $trend->placeholders($format)
+                                ->map(fn (TrendValue $value) => $value->date);
             }
         }
 
