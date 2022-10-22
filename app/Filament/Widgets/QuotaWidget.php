@@ -24,6 +24,7 @@ class QuotaWidget extends BaseWidget
                 Card::make(
                     'State of Charge',
                     is_null(optional($quotas->last())->state_of_charge)
+                    // TODO: since
                     ? 'Disconnected'
                     : $quotas->last()->state_of_charge.' %'
                 )
@@ -41,6 +42,7 @@ class QuotaWidget extends BaseWidget
                 Card::make(
                     'In',
                     is_null(optional($quotas->last())->watts_in_sum)
+                    // TODO: since
                     ? 'Disconnected'
                     : $quotas->last()->watts_in_sum.' W'
                 )
