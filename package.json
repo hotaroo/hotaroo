@@ -26,7 +26,14 @@
         "space": 4,
         "rules": {
             "unicorn/prefer-module": "off",
-            "import/no-unassigned-import": ["error", {"allow": ["**/*.js"]}]
+            "import/no-unassigned-import": [
+                "error",
+                {
+                    "allow": [
+                        "**/*.js"
+                    ]
+                }
+            ]
         }
     }
 }
