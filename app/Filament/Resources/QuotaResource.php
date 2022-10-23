@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use AlperenErsoy\FilamentExport as Export;
 use App\Filament\Resources\QuotaResource\Pages;
 use App\Models\Quota;
 use Filament\Forms;
@@ -10,6 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 
 class QuotaResource extends Resource
 {
@@ -92,6 +94,14 @@ class QuotaResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
+                Export\Actions\FilamentExportBulkAction::make('export')
+                    ->fileName(Str::lower(config('app.name')))
+                    ->directDownload(),
+            ])
+            ->headerActions([
+                Export\Actions\FilamentExportHeaderAction::make('export')
+                    ->fileName(Str::lower(config('app.name')))
+                    ->directDownload(),
             ]);
     }
 
