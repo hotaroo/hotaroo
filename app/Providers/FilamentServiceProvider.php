@@ -60,6 +60,11 @@ class FilamentServiceProvider extends ServiceProvider
         });
 
         Filament::registerRenderHook(
+            'head.end',
+            fn (): View => view('filament.pages.favicon'),
+        );
+
+        Filament::registerRenderHook(
             'footer.end',
             fn (): View => view('filament.pages.footer'),
         );
