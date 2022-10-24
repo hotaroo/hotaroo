@@ -26,6 +26,8 @@ class QuotaSummaryWidget extends BaseWidget
                     number_format(
                         optional($quotaSummary)->watt_hours_in_cumsum / 1000,
                         3,
+                        '.',
+                        '\'',
                     ).' kWh'
                 )
                     ->description($device->label)
@@ -41,6 +43,8 @@ class QuotaSummaryWidget extends BaseWidget
                     number_format(
                         optional($quotaSummary)->watt_hours_out_cumsum / 1000,
                         3,
+                        '.',
+                        '\'',
                     ).' kWh'
                 )
                     ->description($device->label)
@@ -58,6 +62,8 @@ class QuotaSummaryWidget extends BaseWidget
                         number_format(
                             $device->returnOnInvestment() * 100,
                             1,
+                            '.',
+                            '\'',
                         ).' %'
                     )
                         ->description($device->label)
@@ -72,6 +78,8 @@ class QuotaSummaryWidget extends BaseWidget
                         number_format(
                             $device->kilowattHoursInCost(),
                             4,
+                            '.',
+                            '\'',
                         )
                     )
                         ->description($device->label)
