@@ -34,6 +34,23 @@ class FilamentServiceProvider extends ServiceProvider
             Filament::registerTheme(
                 app(Vite::class)('resources/css/filament.css'),
             );
+
+            Filament::registerUserMenuItems([
+                'account' => UserMenuItem::make()->url(
+                    UserResource::getUrl('edit', ['record' => auth()->user()])
+                ),
+                'logout' => UserMenuItem::make()->url(route('logout')),
+            ]);
+
+            Filament::registerRenderHook(
+                'head.end',
+                fn (): View => view('filament.pages.favicon'),
+            );
+
+            Filament::registerRenderHook(
+                'footer.end',
+                fn (): View => view('filament.pages.footer'),
+            );
         });
 
         TextColumn::configureUsing(
@@ -48,25 +65,6 @@ class FilamentServiceProvider extends ServiceProvider
                     auth()->user()->date_format
                     .' '.auth()->user()->time_format
                 )
-        );
-
-        Filament::serving(function () {
-            Filament::registerUserMenuItems([
-                'account' => UserMenuItem::make()->url(
-                    UserResource::getUrl('edit', ['record' => auth()->user()])
-                ),
-                'logout' => UserMenuItem::make()->url(route('logout')),
-            ]);
-        });
-
-        Filament::registerRenderHook(
-            'head.end',
-            fn (): View => view('filament.pages.favicon'),
-        );
-
-        Filament::registerRenderHook(
-            'footer.end',
-            fn (): View => view('filament.pages.footer'),
         );
     }
 }
