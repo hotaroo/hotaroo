@@ -30,7 +30,7 @@ class QuotaSummaryChart extends LineChartWidget
                     'text' => 'Time of Day',
                 ],
             ],
-            'y' => [
+            'y1' => [
                 'title' => [
                     'display' => true,
                     'text' => 'Out [Wh]',
@@ -80,6 +80,17 @@ class QuotaSummaryChart extends LineChartWidget
 
             $datasets->push(
                 [
+                    'showLine' => false,
+                    'pointRadius' => 0,
+                    'pointHitRadius' => 0,
+                    'data' => $data->pluck('watt_hours_in_sum'),
+                    'stepped' => 'after',
+                    'yAxisID' => 'y1',
+                ],
+            );
+
+            $datasets->push(
+                [
                     'label' => $device->label,
                     'data' => $data->pluck('watt_hours_in_sum'),
                     'stepped' => 'after',
@@ -92,6 +103,18 @@ class QuotaSummaryChart extends LineChartWidget
                     'label' => $device->label,
                     'data' => $data->pluck('watt_hours_out_sum'),
                     'stepped' => 'after',
+                    'yAxisID' => 'y1',
+                ],
+            );
+
+            $datasets->push(
+                [
+                    'showLine' => false,
+                    'pointRadius' => 0,
+                    'pointHitRadius' => 0,
+                    'data' => $data->pluck('watt_hours_out_sum'),
+                    'stepped' => 'after',
+                    'yAxisID' => 'y2',
                 ],
             );
 
