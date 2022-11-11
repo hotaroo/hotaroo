@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Filament\Resources\UserResource;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Navigation\NavigationItem;
 use Filament\Navigation\UserMenuItem;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Contracts\View\View;
@@ -41,6 +42,15 @@ class FilamentServiceProvider extends ServiceProvider
                 ),
                 'logout' => UserMenuItem::make()->url(route('logout')),
             ]);
+
+            if (auth()->user()->is_admin) {
+                Filament::registerNavigationItems([
+                    NavigationItem::make('Telescope')
+                        ->url(route('telescope'))
+                        ->icon('heroicon-o-sparkles')
+                        ->group('Admin'),
+                ]);
+            }
 
             Filament::registerRenderHook(
                 'head.end',

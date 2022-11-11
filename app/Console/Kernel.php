@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('telescope:prune')->daily();
         $schedule->command('quota:store')->everyMinute();
         $schedule->command('quota:summarise')->everyFiveMinutes();
     }

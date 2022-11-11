@@ -48,6 +48,7 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_admin' => 'boolean',
         'ecoflow_key' => 'encrypted',
         'ecoflow_secret' => 'encrypted',
     ];
