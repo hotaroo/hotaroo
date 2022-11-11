@@ -19,10 +19,12 @@ class QuotaSummaryWidget extends BaseWidget
 
             $cards->push(
                 Card::make(
-                    'In in '.$device->created_at->startOfDay()->diffForHumans(
-                        now()->startOfDay()->addDay(),
-                        CarbonInterface::DIFF_ABSOLUTE
-                    ),
+                    'In in '
+                    .optional(optional($device->created_at)->startOfDay())
+                        ->diffForHumans(
+                            now()->startOfDay()->addDay(),
+                            CarbonInterface::DIFF_ABSOLUTE
+                        ),
                     number_format(
                         optional($quotaSummary)->watt_hours_in_cumsum / 1000,
                         3,
@@ -36,10 +38,12 @@ class QuotaSummaryWidget extends BaseWidget
 
             $cards->push(
                 Card::make(
-                    'Out in '.$device->created_at->startOfDay()->diffForHumans(
-                        now()->startOfDay()->addDay(),
-                        CarbonInterface::DIFF_ABSOLUTE
-                    ),
+                    'Out in '
+                    .optional(optional($device->created_at)->startOfDay())
+                        ->diffForHumans(
+                            now()->startOfDay()->addDay(),
+                            CarbonInterface::DIFF_ABSOLUTE
+                        ),
                     number_format(
                         optional($quotaSummary)->watt_hours_out_cumsum / 1000,
                         3,

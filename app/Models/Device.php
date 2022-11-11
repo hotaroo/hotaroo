@@ -128,6 +128,7 @@ class Device extends Model
     public function kilowattHoursInCost()
     {
         return $this->latestQuotaSummary
+                   && $this->latestQuotaSummary->watt_hours_in_cumsum > 0
                ? $this->investment
                  / ($this->latestQuotaSummary->watt_hours_in_cumsum / 1000)
                : null;
