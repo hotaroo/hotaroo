@@ -58,7 +58,8 @@ class HistoryChart extends BarChartWidget
             case 'm':
                 $start = now(auth()->user()->timezone)
                              ->startOfDay()
-                             ->subMonth();
+                             ->subMonth()
+                             ->addDay();
                 $end = now(auth()->user()->timezone)->endOfDay();
                 $interval = 'perDay';
                 $format = 'd';
@@ -67,14 +68,18 @@ class HistoryChart extends BarChartWidget
             case 'y':
                 $start = now(auth()->user()->timezone)
                              ->startOfMonth()
-                             ->subYear();
+                             ->subYear()
+                             ->addMonth();
                 $end = now(auth()->user()->timezone)->endOfMonth();
                 $interval = 'perMonth';
                 $format = 'M';
 
                 break;
             default: // case 'w'
-                $start = now(auth()->user()->timezone)->startOfDay()->subWeek();
+                $start = now(auth()->user()->timezone)
+                             ->startOfDay()
+                             ->subWeek()
+                             ->addDay();
                 $end = now(auth()->user()->timezone)->endOfDay();
                 $interval = 'perDay';
                 $format = 'D';

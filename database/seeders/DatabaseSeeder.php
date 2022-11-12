@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(2)
+        User::factory()
             ->has(
-                Device::factory(2)
+                Device::factory()
                     ->hasQuotas(36 * 60)
             )
             ->create();
