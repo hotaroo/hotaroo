@@ -49,12 +49,15 @@ class Device extends Model
      */
     public function storeQuota()
     {
-        $response = Http::ecoflow()->withHeaders([
-            'appKey' => $this->user->ecoflow_key,
-            'secretKey' => $this->user->ecoflow_secret,
-        ])->get('/device/queryDeviceQuota', [
-            'sn' => $this->serial_number,
-        ]);
+        $response = Http::ecoflow()
+            ->withHeaders([
+                'appKey' => $this->user->ecoflow_key,
+                'secretKey' => $this->user->ecoflow_secret,
+            ])
+            ->retry(3, 100)
+            ->get('/device/queryDeviceQuota', [
+                'sn' => $this->serial_number,
+            ]);
 
         $data = optional($response->object())->data;
 
